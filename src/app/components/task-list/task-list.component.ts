@@ -85,14 +85,18 @@ export class TaskListComponent implements OnInit {
   }
 
   editTask(task: Task): void {
-    if (this.taskFormComponent) {
+    const confirmEdit = confirm('Are you sure you want to edit this task?');
+    if (confirmEdit && this.taskFormComponent) {
       this.taskFormComponent.setEditMode(task);
     }
   }
 
   deleteTask(id: number): void {
-    this.taskService.deleteTask(id);
-    this.updateTaskList();
+    const confirmDelete = confirm('Are you sure you want to delete this task?');
+    if (confirmDelete) {
+      this.taskService.deleteTask(id);
+      this.updateTaskList();
+    }
   }
 
   toggleStatus(task: Task): void {
@@ -109,5 +113,4 @@ export class TaskListComponent implements OnInit {
     this.saveTask(task);  
     this.taskFormComponent.resetForm();
   }
-  
 }

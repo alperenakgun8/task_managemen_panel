@@ -5,9 +5,9 @@
   </div>
 
   <!-- Task Form -->
-  <app-task-form (taskSaved)="onTaskSaved($event)"></app-task-form> <!-- taskSaved eventini dinle -->
+  <app-task-form (taskSaved)="onTaskSaved($event)"></app-task-form>
 
-  <!-- Filter and Sort  -->
+  <!-- Filter and Sort -->
   <form [formGroup]="filterForm" class="filter-sort p-grid">
     <div class="p-col-12 p-md-6">
       <label for="statusFilter">Filter by Status:</label>
@@ -46,27 +46,28 @@
             label="Edit Task"
             (click)="editTask(task)"
             icon="pi pi-pencil"
-            class="p-button-text p-button-large"
-          ></button>
+            class="p-button-primary p-button-text p-button-large p-button-rounded p-button-outlined"
+          >Edit Task</button>
+
           <button
             pButton
             type="button"
             label="Delete Task"
             (click)="deleteTask(task.id)"
             icon="pi pi-trash"
-            class="p-button-danger p-button-text p-button-large"
-          ></button>
+            class="p-button-danger p-button-text p-button-large p-button-rounded p-button-outlined"
+          >Delete Task</button>
+
           <button
             pButton
             type="button"
             label="Toggle Status"
             (click)="toggleStatus(task)"
             icon="pi pi-check-circle"
-            class="p-button-info p-button-text p-button-large"
-          ></button>
+            class="p-button-info p-button-text p-button-large p-button-rounded p-button-outlined"
+          >Change Status</button>
         </div>
       </ng-template>
-      
     </p-card>
   </div>
 </div>
