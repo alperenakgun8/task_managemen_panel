@@ -86,7 +86,7 @@ export class TaskListComponent implements OnInit {
 
   editTask(task: Task): void {
     if (this.taskFormComponent) {
-      this.taskFormComponent.setEditMode(task);  
+      this.taskFormComponent.setEditMode(task);
     }
   }
 
@@ -107,5 +107,7 @@ export class TaskListComponent implements OnInit {
 
   onTaskSaved(task: Task): void {
     this.saveTask(task);  
+    this.taskFormComponent.resetForm(); // Form her zaman sıfırlanıyor
   }
+  
 }

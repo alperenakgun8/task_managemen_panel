@@ -17,13 +17,11 @@ export class TaskService {
   }
 
   addTask(task: Task): void {
-    if (this.tasks.some(t => t.id === task.id)) {
-      throw new Error('A task with the same ID already exists.');
-    }
+    task.id = this.tasks.length ? Math.max(...this.tasks.map(t => t.id)) + 1 : 1; // ID otomatik atanıyor
     this.tasks.push(task); 
     this.tasksSubject.next([...this.tasks]); 
-    console.log('Updated tasks: ', this.tasks); 
   }
+  
   
   updateTask(updatedTask: Task): void {
     const index = this.tasks.findIndex(task => task.id === updatedTask.id);
