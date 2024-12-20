@@ -27,16 +27,18 @@ export class TaskListComponent implements OnInit {
   ];
 
   sortOptions: { label: string, value: string }[] = [
-    { label: 'Created Date', value: 'createdDate' },
-    { label: 'Due Date', value: 'dueDate' }
+    { label: 'Created Date Ascending', value: 'createdDateAsc' },
+    { label: 'Created Date Descending', value: 'createdDateDesc' },
+    { label: 'Due Date Ascending', value: 'dueDateAsc' },
+    { label: 'Due Date Descending', value: 'dueDateDesc' }
   ];
-
+  
   @ViewChild(TaskFormComponent) taskFormComponent!: TaskFormComponent;
 
   constructor(private taskService: TaskService, private fb: FormBuilder) {
     this.filterForm = this.fb.group({
       statusFilter: ['all'],
-      sortBy: ['createdDate']
+      sortBy: ['createdDateAsc']
     });
 
     this.tasks$ = this.taskService.tasks$;
@@ -60,12 +62,18 @@ export class TaskListComponent implements OnInit {
 
   private sortTasks(tasks: Task[]): Task[] {
     const sortBy = this.filterForm.get('sortBy')?.value;
-    if (sortBy === 'createdDate') {
-      return tasks.sort((a, b) => a.createdDate.getTime() - b.createdDate.getTime());
-    } else if (sortBy === 'dueDate') {
-      return tasks.sort((a, b) => (a.dueDate?.getTime() || 0) - (b.dueDate?.getTime() || 0));
+    switch (sortBy) {
+      case 'createdDateAsc':
+        return tasks.sort((a, b) => a.createdDate.getTime() - b.createdDate.getTime());
+      case 'createdDateDesc':
+        return tasks.sort((a, b) => b.createdDate.getTime() - a.createdDate.getTime());
+      case 'dueDateAsc':
+        return tasks.sort((a, b) => (a.dueDate?.getTime() || 0) - (b.dueDate?.getTime() || 0));
+      case 'dueDateDesc':
+        return tasks.sort((a, b) => (b.dueDate?.getTime() || 0) - (a.dueDate?.getTime() || 0));
+      default:
+        return tasks;
     }
-    return tasks;
   }
 
   private updateTaskList(): void {

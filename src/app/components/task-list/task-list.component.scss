@@ -89,13 +89,13 @@
         align-items: center;
         justify-content: center;
         color: white;
-        background-color: #007bff; /* Similar to Save Button's blue */
+        background-color: #007bff; 
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: #0056b3; /* Darker blue on hover */
+          background-color: #0056b3; 
         }
 
         &.p-button-text {
@@ -138,4 +138,8 @@
   &.ui-datepicker {
     border: none;
   }
+}
+
+.p-dropdown .p-dropdown-panel {
+  z-index: 9999 !important; 
 }
