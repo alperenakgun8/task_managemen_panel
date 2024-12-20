@@ -40,11 +40,33 @@
       </ng-template>
       <ng-template pTemplate="footer">
         <div class="task-buttons">
-          <button pButton type="button" label="Edit" (click)="editTask(task)" icon="pi pi-pencil" class="p-button-text"></button>
-          <button pButton type="button" label="Delete" class="p-button-danger p-button-text" (click)="deleteTask(task.id)" icon="pi pi-trash"></button>
-          <button pButton type="button" label="Toggle Status" (click)="toggleStatus(task)" icon="pi pi-check-circle" class="p-button-info p-button-text"></button>
+          <button
+            pButton
+            type="button"
+            label="Edit Task"
+            (click)="editTask(task)"
+            icon="pi pi-pencil"
+            class="p-button-text p-button-large"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Delete Task"
+            (click)="deleteTask(task.id)"
+            icon="pi pi-trash"
+            class="p-button-danger p-button-text p-button-large"
+          ></button>
+          <button
+            pButton
+            type="button"
+            label="Toggle Status"
+            (click)="toggleStatus(task)"
+            icon="pi pi-check-circle"
+            class="p-button-info p-button-text p-button-large"
+          ></button>
         </div>
       </ng-template>
+      
     </p-card>
   </div>
 </div>

@@ -32,16 +32,15 @@ export class TaskFormComponent {
       return;
     }
   
-    this.taskSaved.emit(this.task); // Görevi kaydet
+    this.taskSaved.emit(this.task); 
   
     if (this.isEditMode) {
-      this.isEditMode = false; // Düzenleme modu kapatılıyor
+      this.isEditMode = false; 
     } else {
-      this.resetForm(); // Yeni görev ekleniyorsa form sıfırlanıyor
+      this.resetForm(); 
     }
   }
   
-
   setEditMode(task: Task): void {
     this.isEditMode = true;
     this.task = { ...task };  
@@ -56,7 +55,7 @@ export class TaskFormComponent {
       createdDate: new Date(),
       dueDate: undefined
     };
-    this.isEditMode = false; // Düzenleme modu kapatılıyor
+    this.isEditMode = false; 
   }
   
 }

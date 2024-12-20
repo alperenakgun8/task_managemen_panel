@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   addTask(task: Task): void {
-    task.id = this.tasks.length ? Math.max(...this.tasks.map(t => t.id)) + 1 : 1; // ID otomatik atanıyor
+    task.id = this.tasks.length ? Math.max(...this.tasks.map(t => t.id)) + 1 : 1;
     this.tasks.push(task); 
     this.tasksSubject.next([...this.tasks]); 
   }

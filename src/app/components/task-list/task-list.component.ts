@@ -107,7 +107,7 @@ export class TaskListComponent implements OnInit {
 
   onTaskSaved(task: Task): void {
     this.saveTask(task);  
-    this.taskFormComponent.resetForm(); // Form her zaman sıfırlanıyor
+    this.taskFormComponent.resetForm();
   }
   
 }
