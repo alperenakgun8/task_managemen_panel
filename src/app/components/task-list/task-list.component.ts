@@ -17,7 +17,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  tasks$: Observable<Task[]>;  // tasks$ artık Observable olarak başlatıldı
+  tasks$: Observable<Task[]>; 
   filterForm: FormGroup;
 
   statusOptions: { label: string, value: string }[] = [
@@ -39,7 +39,6 @@ export class TaskListComponent implements OnInit {
       sortBy: ['createdDate']
     });
 
-    // tasks$ doğrudan taskService.tasks$'ten alınır
     this.tasks$ = this.taskService.tasks$;
   }
 
@@ -78,16 +77,16 @@ export class TaskListComponent implements OnInit {
 
   saveTask(task: Task): void {
     if (task.id) {
-      this.taskService.updateTask(task);  // Eğer ID varsa, güncelle
+      this.taskService.updateTask(task); 
     } else {
-      this.taskService.addTask(task);  // Yeni görevse, ekle
+      this.taskService.addTask(task); 
     }
     this.updateTaskList();
   }
 
   editTask(task: Task): void {
     if (this.taskFormComponent) {
-      this.taskFormComponent.setEditMode(task);  // Düzenleme modunu aç
+      this.taskFormComponent.setEditMode(task);  
     }
   }
 
@@ -107,6 +106,6 @@ export class TaskListComponent implements OnInit {
   }
 
   onTaskSaved(task: Task): void {
-    this.saveTask(task);  // Save fonksiyonunu tetikler
+    this.saveTask(task);  
   }
 }
