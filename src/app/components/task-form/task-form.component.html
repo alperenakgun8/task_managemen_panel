@@ -1,0 +1,49 @@
+<div class="task-form">
+  <form (ngSubmit)="saveTask(form)" #form="ngForm">
+    <div class="p-field">
+      <label for="title">Task Name</label>
+      <input
+        id="title"
+        pInputText
+        [(ngModel)]="task.title"
+        name="title"
+        required
+        #title="ngModel"
+        [ngClass]="{'ng-dirty': title.invalid && title.touched}"
+      />
+      <div *ngIf="title.invalid && title.touched" class="error-message">
+        Task name is required
+      </div>
+    </div>
+    <div class="p-field">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        pInputTextarea
+        [(ngModel)]="task.description"
+        name="description"
+        required
+        #description="ngModel"
+        [ngClass]="{'ng-dirty': description.invalid && description.touched}"
+      ></textarea>
+      <div *ngIf="description.invalid && description.touched" class="error-message">
+        Description is required
+      </div>
+    </div>
+    <div class="p-field">
+      <label for="dueDate">Due Date</label>
+      <p-calendar
+        id="dueDate"
+        [(ngModel)]="task.dueDate"
+        name="dueDate"
+        required
+        #dueDate="ngModel"
+        [ngClass]="{'ng-dirty': dueDate.invalid && dueDate.touched}"
+      ></p-calendar>
+      <div *ngIf="dueDate.invalid && dueDate.touched" class="error-message">
+        Due date is required
+      </div>
+    </div>
+    <button pButton type="submit" label="Save" [disabled]="form.invalid"></button>
+  </form>
+</div>

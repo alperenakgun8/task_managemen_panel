@@ -1,0 +1,40 @@
+<div class="task-list">
+  <form [formGroup]="filterForm" class="filter-sort p-grid">
+    <div class="p-col-12 p-md-6">
+      <label for="statusFilter">Filter by Status:</label>
+      <p-dropdown
+        id="statusFilter"
+        formControlName="statusFilter"
+        [options]="statusOptions"
+        class="p-inputtext p-component"
+      ></p-dropdown>
+    </div>
+    <div class="p-col-12 p-md-6">
+      <label for="sortBy">Sort by:</label>
+      <p-dropdown
+        id="sortBy"
+        formControlName="sortBy"
+        [options]="sortOptions"
+        class="p-inputtext p-component"
+      ></p-dropdown>
+    </div>
+  </form>
+
+  <div *ngFor="let task of (tasks$ | async)" class="task-card p-col-12 p-md-6 p-lg-4">
+    <p-card [header]="task.title" [style]="{'width':'100%'}" [class]="getTaskStatusClass(task)">
+      <ng-template pTemplate="content">
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p><strong>Status:</strong> {{ task.status ? 'Completed' : 'Not Completed' }}</p>
+        <p><strong>Created on:</strong> {{ task.createdDate | date }}</p>
+        <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="task-buttons">
+          <button pButton type="button" label="Edit" (click)="editTask(task)" icon="pi pi-pencil"></button>
+          <button pButton type="button" label="Delete" class="p-button-danger" (click)="deleteTask(task.id)" icon="pi pi-trash"></button>
+          <button pButton type="button" label="Toggle Status" (click)="toggleStatus(task)" icon="pi pi-check-circle" class="p-button-info p-button-text"></button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
