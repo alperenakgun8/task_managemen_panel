@@ -12,12 +12,12 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DropdownModule, CardModule],
+  imports: [CommonModule, ReactiveFormsModule, DropdownModule, CardModule, TaskFormComponent],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  tasks$: Observable<Task[]>; // tasks$ artık Observable olarak başlatıldı
+  tasks$: Observable<Task[]>;  // tasks$ artık Observable olarak başlatıldı
   filterForm: FormGroup;
 
   statusOptions: { label: string, value: string }[] = [
@@ -77,13 +77,17 @@ export class TaskListComponent implements OnInit {
   }
 
   saveTask(task: Task): void {
-    this.taskService.addTask(task);
+    if (task.id) {
+      this.taskService.updateTask(task);  // Eğer ID varsa, güncelle
+    } else {
+      this.taskService.addTask(task);  // Yeni görevse, ekle
+    }
     this.updateTaskList();
   }
 
   editTask(task: Task): void {
     if (this.taskFormComponent) {
-      this.taskFormComponent.setEditMode(task);
+      this.taskFormComponent.setEditMode(task);  // Düzenleme modunu aç
     }
   }
 
@@ -100,5 +104,9 @@ export class TaskListComponent implements OnInit {
 
   getTaskStatusClass(task: Task): string {
     return task.status ? 'completed' : 'not-completed';
+  }
+
+  onTaskSaved(task: Task): void {
+    this.saveTask(task);  // Save fonksiyonunu tetikler
   }
 }

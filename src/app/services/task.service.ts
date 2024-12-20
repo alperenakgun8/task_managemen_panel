@@ -22,18 +22,19 @@ export class TaskService {
     }
     this.tasks.push(task); // Yeni görev ekle
     this.tasksSubject.next([...this.tasks]); // Güncel görevler listesini BehaviorSubject'e gönder
+    console.log('Updated tasks: ', this.tasks); // Eklenen görevleri konsola yazdır
   }
-
+  
   updateTask(updatedTask: Task): void {
     const index = this.tasks.findIndex(task => task.id === updatedTask.id);
-    if (index > -1) {
-      this.tasks[index] = updatedTask; // Güncel görevi bul ve değiştir
-      this.tasksSubject.next([...this.tasks]); // Güncel görevler listesini BehaviorSubject'e gönder
+    if (index !== -1) {
+      this.tasks[index] = updatedTask; // Güncellenmiş görev verilerini bul ve güncelle
+      this.tasksSubject.next([...this.tasks]); // Güncellenmiş listeyi yay
     }
   }
 
   deleteTask(id: number): void {
-    this.tasks = this.tasks.filter(task => task.id !== id); // Görevi sil
-    this.tasksSubject.next([...this.tasks]); // Güncel görevler listesini BehaviorSubject'e gönder
+    this.tasks = this.tasks.filter(task => task.id !== id); // Silinen görev listeden çıkar
+    this.tasksSubject.next([...this.tasks]); // Güncel listeyi yay
   }
 }
